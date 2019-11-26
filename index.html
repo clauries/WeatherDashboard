@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+
+    <div class="app-heading" id="div-heading">
+        <h1 class="app-name">Weather Dashboard</h1>
+    </div>
+
+
+    <div class="container-fluid row search-and-results">
+        <nav class="navbar-light bg-light search col-md-3 search-col" id="search-col">
+            <div class="search-city">
+                Search for a City:
+            </div>
+            <form class="form-inline search-form">
+                <input class="form-control search-input mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search-btn my-2 my-sm-0" type="submit"><i
+                        class="fas fa-search-location"></i></button>
+            </form>
+            <div class="recent-search">
+
+            </div>
+        </nav>
+
+        <div class="results col-md-9">
+            <div class="results-today ">
+                <h2 class="results-city-date">City/date </h2>
+                <p class="results-temp">Temp: </p>
+                <p class="results-humidity">Humidity: </p>
+                <p class="results-wind">Wind Speed: </p>
+                <p class="results-uv">UV index: </p>
+            </div>
+            <div class="results-five-day">
+                <h2 class="results-forcast">5-Day Forcast:</h2>
+                <div class="results-cards">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bootstrap, moment (for time), and JS file-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="assets/script.js"></script>
+</body>
+
+</html>

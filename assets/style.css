@@ -1,0 +1,79 @@
+
+.app-heading{
+    height: 15%;
+    background-color:#303030;
+    text-align: center;
+}
+
+.app-name {
+    color:white;
+    padding: 10px 0;
+}
+
+
+
+.search-and-results {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin: 0.75%;
+    padding: 5px;
+
+
+}
+
+.search-col {
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+
+.search-city {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.search-form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.results-today {
+    border: 1px solid grey;
+    margin: 10px;
+    padding: 10px;
+}
+
+.results-five-day {
+    margin: 11px;
+    padding: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.results-cards {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.card {
+    margin: 1%;
+}
+
+@media only screen and (max-width: 600px) {
+    .results-cards{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .search-and-results {
+        display:flex;
+        flex-direction: column;
+    }
+
+  }
+
