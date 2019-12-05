@@ -140,22 +140,8 @@ You are required to submit the following:
 
 
 
-# Pseudocoding HTML
-sidebar nav with search for city
-    nav to popular cities
-
-In Container
-div with city, date, and current weather emoji
-div of temp, humidity, sind speed, & UV index
-div with 5 day forcast
-    5 cards with date, emoji, temp, and humidity
 
 
-
-# Pseudocoding CSS
-Use dar bootstrap for heading nav
-Use flexbox to get the 5 day forcast in line
-blue background for 5 day forcast
 
 
 # Pseudocoding js
