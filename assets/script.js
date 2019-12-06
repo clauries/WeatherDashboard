@@ -27,7 +27,7 @@ $(document).ready(function() {
 
         //Retrieve and append the data for current day's forecast
         let city = $(".results-city").text(weather.name + " ");
-        //let icon = $(".results-icon").append(weather.weather[0].icon);
+        let icon = $(".results-icon").append($('<img/>').attr('src', "http://openweathermap.org/img/wn/" + weather.weather[0].icon + "@2x.png"));
         let temp = $(".results-temp").append("Temp: " + weather.main.temp + " *F");
         let humidity = $(".results-humidity").append("Humidity: " + weather.main.humidity + "%");
         let wind = $(".results-wind").append("Wind Speed: "+ weather.wind.speed + " miles/hour");
@@ -36,7 +36,10 @@ $(document).ready(function() {
         icon = weather.weather[0].icon;
         
         queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
-        queryURLIcons = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        //queryURLIcons = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+        console.log(weather)
+        console.log(weather.weather[0].icon)
 
     // UV ajax call  
     }).then(function() {
@@ -47,21 +50,9 @@ $(document).ready(function() {
             let uvIndex = $(".results-uv").append("UV Index: " + UVInfo.value);
             let date = UVInfo.date_iso.split("T")[0];
             let currentDate = $(".results-date").text("(" + date + ") ");
-            //console.log(UVInfo);
-            //console.log(UVInfo.date_iso.split("T")[0]);
-        })
 
-    //Icon ajax call
-    }).then(function() {
-        $.ajax({
-            url: queryURLIcons,
-            method: "GET"
-        }).then(function(iconImgs) {
-            let iconImg = $(".results-icon").append($('<img/>').attr('src', iconImgs));
-            //console.log(iconImgs);
         })
-
-    })
+})
 
     $.ajax({
         url: queryURLForecast,
@@ -81,6 +72,8 @@ $(document).ready(function() {
         let forecastHumidity;
      
         //In the array for each day, find the highest temp & humidity
+        //Need to move function outside the .then 
+        //Instead of finding the max of the section of the array, need to just pick one time to push into the array - i += 7 in loop
         function high(start, end) { 
             for (let i = start ; i <= end; i++) {
                 let hourlytemp = forecast5Day.list[i].main.temp;
