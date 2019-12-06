@@ -148,13 +148,10 @@ You are required to submit the following:
 click event to 
     Store search to local storage & add to searched list
         Use card list
-    Search for city & load
     remove hide class
 click events for all the searched cities 
     remove hide class
 
-pull info for city for temp, humid, wind, & uv index
-    UV index requires second call to use lat/longitute to get UV info language
 
 Pull 5 day forcast info
 

@@ -25,49 +25,49 @@
                 Search for a City:
             </div>
             <form class="form-inline search-form">
-                <input class="form-control search-input mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success search-btn my-2 my-sm-0" type="submit"><i
+                <input class="form-control search-input mr-sm-2 clear" id="city-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search-btn my-2 my-sm-0" id="search-btn" type="submit"><i
                         class="fas fa-search-location"></i></button>
             </form>
-            <div class="recent-search">
+            <div class="recent-search" id="recent-search">
 
             </div>
         </nav>
 
-        <div class="results col-md-9">
+        <div class="results col-md-9 hide">
             <div class="results-today ">
-                <h2 class="results-head"><span class="results-city">City </span><span class="results-date"> Date </span><span class="results-icon">Icon </span></h2>
-                <p class="results-temp">Temp: </p>
-                <p class="results-humidity">Humidity: </p>
-                <p class="results-wind">Wind Speed: </p>
-                <p class="results-uv">UV index: </p>
+                <h2 class="results-head"><span class="results-city clear">City </span><span class="results-date clear"> Date </span><span class="results-icon clear">Icon </span></h2>
+                <p class="results-temp clear"></p>
+                <p class="results-humidity clear"></p>
+                <p class="results-wind clear"></p>
+                <p class="results-uv clear"></p>
             </div>
             <div class="results-five-day">
                 <h2 class="results-forcast">5-Day Forecast:</h2>
                 <div class="results-cards">
                     <div class="card text-white bg-primary">
                         <div class="card-body" id="day-1">
-                            This is some text within a card body.
+
                         </div>
                     </div>
                     <div class="card text-white bg-primary">
-                        <div class="card-body day-2">
-                            This is some text within a card body.
+                        <div class="card-body" id="day-2">
+                            
                         </div>
                     </div>
                     <div class="card text-white bg-primary">
-                        <div class="card-body day-3">
-                            This is some text within a card body.
+                        <div class="card-body" id="day-3">
+                            
                         </div>
                     </div>
                     <div class="card text-white bg-primary">
-                        <div class="card-body day-4">
-                            This is some text within a card body.
+                        <div class="card-body" id="day-4">
+                            
                         </div>
                     </div>
                     <div class="card text-white bg-primary">
-                        <div class="card-body day-5">
-                            This is some text within a card body.
+                        <div class="card-body" id="day-5">
+                            
                         </div>
                     </div>
                 </div>
