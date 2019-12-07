@@ -163,8 +163,10 @@ $("#search-btn").on("click", function(event) {
 
 //Adding click event to searched city buttons
 $(".recently-searched").on("click", function(event) {
+    console.log("recently searched btn");
     city = $(this).attr("data-name");
     displayForecast();
+    
     
 })
 

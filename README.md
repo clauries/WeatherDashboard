@@ -28,6 +28,8 @@ However, I was unable to make this part of the code work at this time. I may rev
 
 * The UV data was not in the original ajax call. Per the AIP documentation, another call would need to be made using the city's latitude and longitude. I had difficulty figuring out how to nest this ajax call. Ultimately I walked through this process with my tutor and we came up with the current formatting.
 
+* I currently have a bug where the recently searched buttons only work before a new city is added. 
+
 ## Sucesses
 * I learned a lot about how to read APIs and their documentation during this project. There were several parts we needed to call and/or reference. 
 
