@@ -7,6 +7,7 @@ let latitude;
 let longitude;
 let icon;
 
+displayRecentSearches()
 
 function displayForecast() {
 // OpenWeatherMap URL
@@ -107,7 +108,7 @@ function renderButtons() {
       // Then dynamicaly generates buttons for each search in the array
       let a = $("<button>");
       // Adds a class of searched to our button
-      a.addClass("searched");
+      a.addClass("recently-searched");
       // Added a data-attribute
       a.attr("data-name", searches[i]);
       // Provided the initial button text
@@ -117,6 +118,33 @@ function renderButtons() {
     }
   }
 
+//Get stored searches from localStorage
+function displayRecentSearches() {
+
+    // Parsing the JSON string to an object
+    var storedSearches = JSON.parse(localStorage.getItem("searches"));
+
+    // If searches were retrieved from localStorage, update the searches array to it
+    if (storedSearches !== null) {
+        searches = storedSearches;
+    }
+
+    // Render todos to the DOM
+    renderButtons();
+}
+
+//Clear local storage
+$("#clear-history").on("click", function(event) {
+    //Prevents the page from loading another page
+    event.preventDefault();
+    localStorage.clear();
+    $("#recent-search").empty();
+    searches = [];
+
+})
+  
+
+//Click event when search btn is clicked to search for city entered
 $("#search-btn").on("click", function(event) {
     //Prevents the page from loading another page
     event.preventDefault();
@@ -129,18 +157,17 @@ $("#search-btn").on("click", function(event) {
     //Calling displayForecast which will show the current and 5 day forecasts
     displayForecast();
 
+    localStorage.setItem("searches", JSON.stringify(searches));
+    
   });
 
 //Adding click event to searched city buttons
-$(".searched").on("click", function(event) {
-    console.log("Working?")
-    /*
-    cityName = $(searched).getAttribute("data-name");
-    console.log("cityName: " + cityName)
-    city = cityName
-    console.log("city: " + city)
-    displayForecast();*/
-});
+$(".recently-searched").on("click", function(event) {
+    city = $(this).attr("data-name");
+    displayForecast();
+    
+})
+
 
 //In the array for each day, find the highest temp & humidity for each
             //After speaking to TA for class, this may be too difficult of code for this project
