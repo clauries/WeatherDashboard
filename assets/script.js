@@ -1,18 +1,18 @@
 //OpenWeatherMap API key
 let APIKey = "1349b8658e08989cac6393f5e9d7b731";
-let city
+let city;
 let newDiv = $("<div>");
 let searches = [];
 let latitude;
 let longitude;
 let icon;
 
+
 function displayForecast() {
 // OpenWeatherMap URL
 let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
 let queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial";
 let queryURLUV;
-let queryIcons;
 
 // OpenWeatherMap AJAX call for class results  
 $(document).ready(function() {
@@ -33,13 +33,12 @@ $(document).ready(function() {
         let wind = $(".results-wind").append("Wind Speed: "+ weather.wind.speed + " miles/hour");
         latitude = weather.coord.lat;
         longitude = weather.coord.lon; 
-        icon = weather.weather[0].icon;
-        
-        queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
-        //queryURLIcons = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
-        console.log(weather)
-        console.log(weather.weather[0].icon)
+        //Query URL for UVInfo
+        queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
+
+        console.log("Current Weather: " + weather);
+
 
     // UV ajax call  
     }).then(function() {
@@ -47,89 +46,60 @@ $(document).ready(function() {
             url: queryURLUV,
             method: "GET"
         }).then(function(UVInfo) {
+            //takes the latitude & longitude data from weather to find UV data in UVInfo
             let uvIndex = $(".results-uv").append("UV Index: " + UVInfo.value);
             let date = UVInfo.date_iso.split("T")[0];
             let currentDate = $(".results-date").text("(" + date + ") ");
 
+        console.log("UV: " + UVInfo);
         })
-})
 
+})
+    //5 day forecast ajax call
     $.ajax({
         url: queryURLForecast,
         method: "GET"
     }).then(function(forecast5Day) {
-        $(".card-body").empty();
+        //Empty previous data for the 5 day forecast
+        $(".results-cards").empty();
 
+        let day = []
+        
+        //Creates the 5 day forecast cards 7 populates the forecast for each day.
+        for (i=6; i < 40; i+= 8){
+            let newCard = $("<div>");
+            newCard.addClass("card text-white bg-primary");
+            $(".results-cards").append(newCard);
 
-        //Day 1 of forecast
-        //Calling objects
-        let day1 = $("#day-1").append(newDiv);
-        let date1 = forecast5Day.list[5].dt_txt.split(" ")[0];
-        //let iconImg1 =? how do I work with the icons????
-        let tempArr = [];
-        let forecastTemp;
-        let humidityArr = [];
-        let forecastHumidity;
-     
-        //In the array for each day, find the highest temp & humidity
-        //Need to move function outside the .then 
-        //Instead of finding the max of the section of the array, need to just pick one time to push into the array - i += 7 in loop
-        function high(start, end) { 
-            for (let i = start ; i <= end; i++) {
-                let hourlytemp = forecast5Day.list[i].main.temp;
-                let pushTemp = tempArr.push(hourlytemp);
-                let hourlyHumidity = forecast5Day.list[i].main.humidity;
-                let pushHumid = humidityArr.push(hourlyHumidity);
-            }
-            forecastTemp = Math.max.apply(Math, tempArr);
-            forecastHumidity = Math.max.apply(Math, humidityArr);
+            let newCardBody = newCard.append("<div>");
+            newCardBody.addClass("card-body");
 
-            console.log("high: " + forecastTemp);
-            console.log("humid: " + forecastHumidity);
+            let newDiv = $("<div>");
+            newDiv.addClass("forecast5Day");
+            newDiv.attr("data-name", day[i]);
+
+            let date = newDiv.append(forecast5Day.list[i].dt_txt.split(" ")[0]);
+            date.text(day[i]);
+            newCardBody.append(date);
+
+            let icon = "http://openweathermap.org/img/wn/" + forecast5Day.list[i].weather[0].icon + "@2x.png";
+            newDiv.append($('<img/>').attr('src', icon));
+
+            let temp = JSON.stringify(forecast5Day.list[i].main.temp);
+            newDiv.append($("<div>").text("Temp: " + temp + " *F"));
+
+            let humidity = JSON.stringify(forecast5Day.list[i].main.humidity);
+            newDiv.append($("<div>").text("Humidity: " + humidity + "%"));
+            
         }
         
-        //Call function high for day 1
-        high(0, 7);
-    
-
-        //Appending objects
-        let addDate1 = day1.append($("<p>").text(date1));
-        //addIcon = day1.append($("<img>").iconImage1);
-        let addTemp1 = day1.append($("<p>").text("High: " + forecastTemp + " *F"));
-        let addHumidity1 = day1.append($("<p>").text("Humidity: " + forecastHumidity + "%"));
-
-
-        //console.log(forecast5Day.list[5].dt_txt.split(" ")[0])
-        //Day 2 of forecast List 8-15
-        let day2 = $("#day-2").append(newDiv);
-        let date2 = forecast5Day.list[12].dt_txt.split(" ")[0];
-        let addDate2 = day2.append($("<p>").text(date2));
-        
-
-        //Day 3 of forecast list 16-23
-        let day3 = $("#day-3").append(newDiv);
-        let date3 = forecast5Day.list[19].dt_txt.split(" ")[0];
-        let addDate3 = day3.append($("<p>").text(date3));
-
-        //Day 4 of forecast list 24-31
-        let day4 = $("#day-4").append(newDiv);
-        let date4 = forecast5Day.list[28].dt_txt.split(" ")[0];
-        let addDate4 = day4.append($("<p>").text(date4));
-
-        //Day 5 of forecast list 32-40
-        let day5 = $("#day-5").append(newDiv);
-        let date5 = forecast5Day.list[37].dt_txt.split(" ")[0];
-        let addDate5 = day5.append($("<p>").text(date5));
-
-       console.log(forecast5Day);
-
+       console.log("5 Day Forecast: " + forecast5Day);
     })
 });
 }
 
 function renderButtons() {
-    console.log("beef")
-    // Deletes the movies prior to adding new movies
+    // Deletes the buttons to recent searches prior to adding the newest search
     $("#recent-search").empty();
     // Loops through the array of searches
     for (let i = 0; i < searches.length; i++) {
@@ -148,7 +118,6 @@ function renderButtons() {
   }
 
 $("#search-btn").on("click", function(event) {
-
     //Prevents the page from loading another page
     event.preventDefault();
     // This line of code will grab the input from the textbox
@@ -157,7 +126,51 @@ $("#search-btn").on("click", function(event) {
     searches.push(city);
     // Calling renderButtons which handles the processing of our searches array
     renderButtons();
+    //Calling displayForecast which will show the current and 5 day forecasts
     displayForecast();
 
   });
 
+//Adding click event to searched city buttons
+$(".searched").on("click", function(event) {
+    console.log("Working?")
+    /*
+    cityName = $(searched).getAttribute("data-name");
+    console.log("cityName: " + cityName)
+    city = cityName
+    console.log("city: " + city)
+    displayForecast();*/
+});
+
+//In the array for each day, find the highest temp & humidity for each
+            //After speaking to TA for class, this may be too difficult of code for this project
+            //Commenting out for use at a different time. 
+            //To be used with function(forecast5Day)
+            //Was having trouble calling the function a second time
+            
+        /* 
+            let tempArr = [];
+            let forecastTemp;
+            let humidityArr = [];
+            let forecastHumidity;
+            
+            function high(start, end) { 
+                for (let i = start ; i <= end; i++) {
+                    let hourlytemp = forecast5Day.list[i].main.temp;
+                    let pushTemp = tempArr.push(hourlytemp);
+                    let hourlyHumidity = forecast5Day.list[i].main.humidity;
+                    let pushHumid = humidityArr.push(hourlyHumidity);
+                }
+                forecastTemp = Math.max.apply(Math, tempArr);
+                forecastHumidity = Math.max.apply(Math, humidityArr);
+
+                console.log("high: " + forecastTemp);
+                console.log("humid: " + forecastHumidity);
+            }
+            
+            //Call function high for day 1
+            high(0, 7);
+            
+                    let addTemp1 = day1.append($("<p>").text("High: " + forecastTemp + " *F"));
+            let addHumidity1 = day1.append($("<p>").text("Humidity: " + forecastHumidity + "%"));
+            */
